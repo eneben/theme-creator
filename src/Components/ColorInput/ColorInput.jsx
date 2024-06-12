@@ -20,11 +20,10 @@ export default function ColorInput({ id, description, defaultValue }) {
       ></input>
       <input
         type="color"
-        name={`${id}Color`}
         id={`${id}Color`}
         value={valueColorInput}
         onChange={handleColorInput}
-      ></input>
+      />
     </>
   );
 }
