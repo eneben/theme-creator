@@ -1,3 +1,4 @@
+import { uid } from "uid";
 import ColorInput from "../ColorInput/ColorInput";
 
 const exampleColor = {
@@ -6,14 +7,20 @@ const exampleColor = {
   contrastText: "#000000",
 };
 
-export default function ColorForm() {
+export default function ColorForm({ onAddColor }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    // console.log(data.roleInput, data.hexInputText, data.contrastTextInputText);
 
-    console.log(data.roleInput, data.hexInputText, data.contrastTextInputText);
-    // const newColor = {};
+    const newColor = {
+      id: uid(),
+      role: data.roleInput,
+      hex: data.hexInputText,
+      contrastText: data.contrastTextInputText,
+    };
+    onAddColor(newColor);
   }
 
   return (
