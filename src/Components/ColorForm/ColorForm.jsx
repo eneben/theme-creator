@@ -33,7 +33,7 @@ export default function ColorForm({ onAddColor }) {
         id="roleInput"
         placeholder={exampleColor.role}
         required
-      ></input>
+      />
       <ColorInput
         id="hexInput"
         defaultValue={exampleColor.hex}
