@@ -9,13 +9,10 @@ const exampleColor = {
 export default function ColorForm() {
   function handleSubmit(event) {
     event.preventDefault();
-    const formElements = event.target.elements;
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log("formData", formData);
-    console.log("data", data);
-    console.log("formElements", formElements);
 
+    console.log(data.roleInput, data.hexInputText, data.contrastTextInputText);
     // const newColor = {};
   }
 
