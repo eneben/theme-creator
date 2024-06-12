@@ -16,7 +16,7 @@ export default function ColorForm() {
     console.log("data", data);
     console.log("formElements", formElements);
 
-    const newColor = {};
+    // const newColor = {};
   }
 
   return (
@@ -29,7 +29,16 @@ export default function ColorForm() {
         value={exampleColor.role}
         required
       ></input>
-
+      <ColorInput
+        id="hexInput"
+        defaultValue={exampleColor.hex}
+        description="Hex"
+      />
+      <ColorInput
+        id="contrastTextInput"
+        defaultValue={exampleColor.contrastText}
+        description="Contrast Text"
+      />
       <button type="submit">ADD COLOR</button>
     </form>
   );

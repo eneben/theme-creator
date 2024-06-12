@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-export default function ColorInput({ id, description }) {
-  const [valueColorInput, setValueColorInput] = useState("");
-  // ergänze ausgangswert (exampleColor, aber für versch. inputs)
+export default function ColorInput({ id, description, defaultValue }) {
+  const [valueColorInput, setValueColorInput] = useState({ defaultValue });
 
   function handleColorInput(event) {
     console.log(event.target.value);
@@ -24,22 +23,6 @@ export default function ColorInput({ id, description }) {
         value={valueColorInput}
         onChange={handleColorInput}
       ></input>
-      {/* <label htmlFor="hexInput">Hex</label>
-      <input
-        type="color"
-        name="hexInput"
-        id="hexInput"
-        placeholder="#54c73d"
-        required
-      ></input>
-      <label htmlFor="contrastTextInput">Contrast Text</label>
-      <input
-        type="color"
-        name="contrastTextInput"
-        id="contrastTextInput"
-        placeholder="#000000"
-        required
-      ></input> */}
     </>
   );
 }
