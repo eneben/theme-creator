@@ -26,7 +26,7 @@ export default function ColorForm() {
         type="text"
         name="roleInput"
         id="roleInput"
-        value={exampleColor.role}
+        placeholder={exampleColor.role}
         required
       ></input>
       <ColorInput
