@@ -1,5 +1,6 @@
 import { uid } from "uid";
 import ColorInput from "../ColorInput/ColorInput";
+import "./ColorForm.css";
 
 const exampleColor = {
   role: "some color",
@@ -24,7 +25,7 @@ export default function ColorForm({ onAddColor }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <label htmlFor="roleInput">Role</label>
       <input
         type="text"
@@ -43,7 +44,9 @@ export default function ColorForm({ onAddColor }) {
         defaultValue={exampleColor.contrastText}
         description="Contrast Text"
       />
-      <button type="submit">ADD COLOR</button>
+      <button className="addColorButton" type="submit">
+        ADD COLOR
+      </button>
     </form>
   );
 }
