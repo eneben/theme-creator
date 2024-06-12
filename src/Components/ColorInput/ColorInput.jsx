@@ -1,23 +1,27 @@
-export default function ColorInput({ placeholder, id, description }) {
-    
-    function handleColorInput() {
+import { useState } from "react";
 
-    }
+export default function ColorInput({ id, description }) {
+  const [valueColorInput, setValueColorInput] = useState("");
+  // ergänze ausgangswert (exampleColor, aber für versch. inputs)
 
+  function handleColorInput(event) {
+    console.log(event.target.value);
+    setValueColorInput(event.target.value);
+  }
 
   return (
     <>
       <label htmlFor={id}>{description}</label>
       <input
         type="text"
-        value={}
+        value={valueColorInput}
+        onChange={handleColorInput}
       ></input>
       <input
         type="color"
         name={id}
         id={id}
-        placeholder={placeholder}
-        value={}
+        value={valueColorInput}
         onChange={handleColorInput}
       ></input>
       {/* <label htmlFor="hexInput">Hex</label>

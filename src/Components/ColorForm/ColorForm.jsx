@@ -1,6 +1,10 @@
 import ColorInput from "../ColorInput/ColorInput";
 
-exampleColor = { role: "some color", hex: "#123456", contrastText: "#ffffff" };
+const exampleColor = {
+  role: "some color",
+  hex: "#54c73d",
+  contrastText: "#000000",
+};
 
 export default function ColorForm() {
   function handleSubmit(event) {
@@ -22,7 +26,7 @@ export default function ColorForm() {
         type="text"
         name="roleInput"
         id="roleInput"
-        value="some color"
+        value={exampleColor.role}
         required
       ></input>
 
