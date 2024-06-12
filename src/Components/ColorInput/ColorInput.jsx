@@ -4,7 +4,6 @@ export default function ColorInput({ id, description, defaultValue }) {
   const [valueColorInput, setValueColorInput] = useState(defaultValue);
 
   function handleColorInput(event) {
-    // console.log(event.target.value);
     setValueColorInput(event.target.value);
   }
 
@@ -17,7 +16,7 @@ export default function ColorInput({ id, description, defaultValue }) {
         id={`${id}Text`}
         value={valueColorInput}
         onChange={handleColorInput}
-      ></input>
+      />
       <input
         type="color"
         id={`${id}Color`}

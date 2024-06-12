@@ -16,10 +16,6 @@ input {
   border: 1px solid #000000;
 }
 
-input::placeholder {
-  color: #000000;
-}
-
 .addColorButton {
   background-color: #d3d3d3;
   border-radius: 5px;
