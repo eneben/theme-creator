@@ -1,16 +1,26 @@
 import { useState } from "react";
 import "./Color.css";
 import Button from "../Button/Button";
+import ColorForm from "../ColorForm/ColorForm";
 
-export default function Color({ color, onDeleteColor }) {
-  const [displayConfirmation, setDisplayConfirmation] = useState(false);
+export default function Color({ color, onDeleteColor, onUpdateColor }) {
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
-  function toggleDisplayConfirmation() {
-    setDisplayConfirmation(!displayConfirmation);
+  function toggleShowDeleteConfirmation() {
+    setShowDeleteConfirmation(!showDeleteConfirmation);
   }
 
   function deleteColor() {
     onDeleteColor(color.id);
+  }
+
+  function toggleIsEditing() {
+    setIsEditing(!isEditing);
+  }
+
+  function updateColor(newColor) {
+    onUpdateColor(newColor, color.id);
   }
 
   return (
@@ -25,29 +35,37 @@ export default function Color({ color, onDeleteColor }) {
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
-      {displayConfirmation ? (
-        <section className="deleteSection">
+      {showDeleteConfirmation ? (
+        <section className="buttonSection">
           <p className="color-card-highlight">REALLY DELETE?</p>
           <Button
-            className="deleteButton"
             type="button"
-            onClick={toggleDisplayConfirmation}
+            onClick={toggleShowDeleteConfirmation}
             text="NO, CANCEL"
           />
-          <Button
-            className="deleteButton"
-            type="button"
-            onClick={deleteColor}
-            text="YES, DELETE"
-          />
+          <Button type="button" onClick={deleteColor} text="YES, DELETE" />
         </section>
       ) : (
-        <Button
-          className="deleteButton"
-          type="button"
-          onClick={toggleDisplayConfirmation}
-          text="DELETE"
-        />
+        <>
+          {isEditing ? (
+            <>
+              <ColorForm
+                onTransferColor={updateColor}
+                buttonText="UPDATE COLOR"
+              />
+              <Button type="button" onClick={toggleIsEditing} text="CANCEL" />
+            </>
+          ) : (
+            <section className="buttonSection">
+              <Button
+                type="button"
+                onClick={toggleShowDeleteConfirmation}
+                text="DELETE"
+              />
+              <Button type="button" onClick={toggleIsEditing} text="EDIT" />
+            </section>
+          )}
+        </>
       )}
     </div>
   );

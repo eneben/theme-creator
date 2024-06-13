@@ -8,12 +8,12 @@ const exampleColor = {
   contrastText: "#000000",
 };
 
-export default function ColorForm({ onAddColor }) {
+export default function ColorForm({ onTransferColor, buttonText }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const newColor = Object.fromEntries(formData);
-    onAddColor(newColor);
+    onTransferColor(newColor);
     event.target.elements.roleInput.focus();
   }
 
@@ -37,7 +37,7 @@ export default function ColorForm({ onAddColor }) {
         defaultValue={exampleColor.contrastText}
         description="Contrast Text"
       />
-      <Button className="addColorButton" type="submit" text="ADD COLOR" />
+      <Button className="addColorButton" type="submit" text={buttonText} />
     </form>
   );
 }

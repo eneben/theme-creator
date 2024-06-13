@@ -10,11 +10,11 @@
   color: white;
 }
 
-.deleteButton {
+.button {
   box-shadow: 5px 3px 5px #000;
 }
 
-.deleteSection {
+.buttonSection {
   display: flex;
   gap: 10px;
 }

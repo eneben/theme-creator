@@ -27,10 +27,25 @@ function App() {
     setColors(colorsToKeep);
   }
 
+  function handleUpdateColor(newColor, id) {
+    setColors(
+      colors.map((color) => {
+        return color.id === id
+          ? {
+              ...color,
+              role: newColor.roleInput,
+              hex: newColor.hexInputText,
+              contrastText: newColor.contrastTextInputText,
+            }
+          : color;
+      })
+    );
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onAddColor={handleAddColor} />
+      <ColorForm onTransferColor={handleAddColor} buttonText="ADD COLOR" />
       <>
         {colors.length === 0 ? (
           <p className="noColorsMessage">
@@ -42,6 +57,7 @@ function App() {
             return (
               <Color
                 onDeleteColor={handleDeleteColor}
+                onUpdateColor={handleUpdateColor}
                 key={color.id}
                 color={color}
               />
