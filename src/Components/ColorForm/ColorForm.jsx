@@ -1,5 +1,5 @@
-import ColorInput from "../ColorInput/ColorInput";
 import "./ColorForm.css";
+import ColorInput from "../ColorInput/ColorInput";
 
 const exampleColor = {
   role: "some color",
