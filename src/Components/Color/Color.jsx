@@ -1,5 +1,5 @@
+import { useState } from "react";
 import "./Color.css";
-import DeleteColor from "../DeleteColor/DeleteColor";
 
 export default function Color({ color, onDeleteColor }) {
   return (
@@ -15,5 +15,49 @@ export default function Color({ color, onDeleteColor }) {
       <p>contrast: {color.contrastText}</p>
       <DeleteColor onDeleteColor={onDeleteColor} id={color.id} />
     </div>
+  );
+}
+
+export function DeleteColor({ id, onDeleteColor }) {
+  const [displayConfirmation, setDisplayConfirmation] = useState(false);
+
+  function toggleDisplayConfirmation() {
+    setDisplayConfirmation(!displayConfirmation);
+  }
+
+  function handleReallyDelete() {
+    onDeleteColor(id);
+  }
+
+  return (
+    <>
+      {displayConfirmation ? (
+        <section className="deleteSection">
+          <p className="color-card-highlight">Really delete?</p>
+          <button
+            className="deleteButton"
+            type="button"
+            onClick={toggleDisplayConfirmation}
+          >
+            CANCEL
+          </button>
+          <button
+            className="deleteButton"
+            type="button"
+            onClick={handleReallyDelete}
+          >
+            DELETE
+          </button>
+        </section>
+      ) : (
+        <button
+          className="deleteButton"
+          type="button"
+          onClick={toggleDisplayConfirmation}
+        >
+          DELETE
+        </button>
+      )}
+    </>
   );
 }
