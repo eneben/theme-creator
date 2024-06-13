@@ -1,7 +1,18 @@
 import { useState } from "react";
 import "./Color.css";
+import Button from "../Button/Button";
 
 export default function Color({ color, onDeleteColor }) {
+  const [displayConfirmation, setDisplayConfirmation] = useState(false);
+
+  function toggleDisplayConfirmation() {
+    setDisplayConfirmation(!displayConfirmation);
+  }
+
+  function deleteColor() {
+    onDeleteColor(color.id);
+  }
+
   return (
     <div
       className="color-card"
@@ -13,51 +24,31 @@ export default function Color({ color, onDeleteColor }) {
       <h3 className="color-card-highlight">{color.hex}</h3>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
-      <DeleteColor onDeleteColor={onDeleteColor} id={color.id} />
-    </div>
-  );
-}
 
-export function DeleteColor({ id, onDeleteColor }) {
-  const [displayConfirmation, setDisplayConfirmation] = useState(false);
-
-  function toggleDisplayConfirmation() {
-    setDisplayConfirmation(!displayConfirmation);
-  }
-
-  function handleReallyDelete() {
-    onDeleteColor(id);
-  }
-
-  return (
-    <>
       {displayConfirmation ? (
         <section className="deleteSection">
-          <p className="color-card-highlight">Really delete?</p>
-          <button
+          <p className="color-card-highlight">REALLY DELETE?</p>
+          <Button
             className="deleteButton"
             type="button"
             onClick={toggleDisplayConfirmation}
-          >
-            CANCEL
-          </button>
-          <button
+            text="NO, CANCEL"
+          />
+          <Button
             className="deleteButton"
             type="button"
-            onClick={handleReallyDelete}
-          >
-            DELETE
-          </button>
+            onClick={deleteColor}
+            text="YES, DELETE"
+          />
         </section>
       ) : (
-        <button
+        <Button
           className="deleteButton"
           type="button"
           onClick={toggleDisplayConfirmation}
-        >
-          DELETE
-        </button>
+          text="DELETE"
+        />
       )}
-    </>
+    </div>
   );
 }

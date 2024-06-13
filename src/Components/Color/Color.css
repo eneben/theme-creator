@@ -12,5 +12,9 @@
 
 .deleteButton {
   box-shadow: 5px 3px 5px #000;
-  margin-bottom: 10px;
+}
+
+.deleteSection {
+  display: flex;
+  gap: 10px;
 }

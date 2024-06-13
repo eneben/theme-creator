@@ -1,5 +1,6 @@
 import "./ColorForm.css";
 import ColorInput from "../ColorInput/ColorInput";
+import Button from "../Button/Button";
 
 const exampleColor = {
   role: "some color",
@@ -36,9 +37,7 @@ export default function ColorForm({ onAddColor }) {
         defaultValue={exampleColor.contrastText}
         description="Contrast Text"
       />
-      <button className="addColorButton" type="submit">
-        ADD COLOR
-      </button>
+      <Button className="addColorButton" type="submit" text="ADD COLOR" />
     </form>
   );
 }
