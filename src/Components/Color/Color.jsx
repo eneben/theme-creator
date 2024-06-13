@@ -1,4 +1,5 @@
 import "./Color.css";
+import DeleteColor from "../DeleteColor/DeleteColor";
 
 export default function Color({ color }) {
   return (
@@ -12,6 +13,7 @@ export default function Color({ color }) {
       <h3 className="color-card-headline">{color.hex}</h3>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+      <DeleteColor id={color.id} />
     </div>
   );
 }
