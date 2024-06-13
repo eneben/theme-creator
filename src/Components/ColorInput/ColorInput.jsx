@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./ColorInput.css";
 
 export default function ColorInput({ id, description, defaultValue }) {
   const [valueColorInput, setValueColorInput] = useState(defaultValue);
@@ -10,19 +11,21 @@ export default function ColorInput({ id, description, defaultValue }) {
   return (
     <>
       <label htmlFor={`${id}Text`}>{description}</label>
-      <input
-        type="text"
-        name={`${id}Text`}
-        id={`${id}Text`}
-        value={valueColorInput}
-        onChange={handleColorInput}
-      />
-      <input
-        type="color"
-        id={`${id}Color`}
-        value={valueColorInput}
-        onChange={handleColorInput}
-      />
+      <section className="colorInputSection">
+        <input
+          type="text"
+          name={`${id}Text`}
+          id={`${id}Text`}
+          value={valueColorInput}
+          onChange={handleColorInput}
+        />
+        <input
+          type="color"
+          id={`${id}Color`}
+          value={valueColorInput}
+          onChange={handleColorInput}
+        />
+      </section>
     </>
   );
 }
