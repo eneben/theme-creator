@@ -21,6 +21,7 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
 
   function updateColor(newColor) {
     onUpdateColor(newColor, color.id);
+    toggleIsEditing();
   }
 
   return (
