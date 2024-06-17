@@ -36,7 +36,7 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
-      {showDeleteConfirmation ? (
+      {showDeleteConfirmation && (
         <section className="buttonSection">
           <p className="color-card-highlight">REALLY DELETE?</p>
           <Button
@@ -46,27 +46,24 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
           />
           <Button type="button" onClick={deleteColor} text="YES, DELETE" />
         </section>
-      ) : (
+      )}
+
+      {isEditing && (
         <>
-          {isEditing ? (
-            <>
-              <ColorForm
-                onTransferColor={updateColor}
-                buttonText="UPDATE COLOR"
-              />
-              <Button type="button" onClick={toggleIsEditing} text="CANCEL" />
-            </>
-          ) : (
-            <section className="buttonSection">
-              <Button
-                type="button"
-                onClick={toggleShowDeleteConfirmation}
-                text="DELETE"
-              />
-              <Button type="button" onClick={toggleIsEditing} text="EDIT" />
-            </section>
-          )}
+          <ColorForm onTransferColor={updateColor} buttonText="UPDATE COLOR" />
+          <Button type="button" onClick={toggleIsEditing} text="CANCEL" />
         </>
+      )}
+
+      {!showDeleteConfirmation && !isEditing && (
+        <section className="buttonSection">
+          <Button
+            type="button"
+            onClick={toggleShowDeleteConfirmation}
+            text="DELETE"
+          />
+          <Button type="button" onClick={toggleIsEditing} text="EDIT" />
+        </section>
       )}
     </div>
   );
