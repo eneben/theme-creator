@@ -9,3 +9,12 @@
   background: black;
   color: white;
 }
+
+.button {
+  box-shadow: 5px 3px 5px #000;
+}
+
+.buttonSection {
+  display: flex;
+  gap: 10px;
+}
