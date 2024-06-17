@@ -33,7 +33,7 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
         color: color.contrastText,
       }}
     >
-      <section className="hexCodeSection">
+      <section className="buttonSection">
         <h3 className="color-card-highlight">{color.hex}</h3>
         <CopyToClipboard copiedText={color.hex} />
       </section>

@@ -23,9 +23,11 @@ export default function CopyToClipboard({ copiedText }) {
     };
   }, [isCopied]);
 
-  <Button
-    type="button"
-    onClick={writeClipboardText}
-    text={isCopied ? "SUCCESFULLY COPIED!" : "COPY"}
-  />;
+  return (
+    <Button
+      type="button"
+      onClick={writeClipboardText}
+      text={isCopied ? "SUCCESFULLY COPIED!" : "COPY"}
+    />
+  );
 }
