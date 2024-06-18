@@ -3,6 +3,7 @@ import "./Color.css";
 import Button from "../Button/Button";
 import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
+import ContrastChecker from "../ContrastChecker/ContrastChecker";
 
 export default function Color({ color, onDeleteColor, onUpdateColor }) {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -40,6 +41,11 @@ export default function Color({ color, onDeleteColor, onUpdateColor }) {
 
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+
+      <ContrastChecker
+        firstColor={color.hex}
+        secondColor={color.contrastText}
+      />
 
       {showDeleteConfirmation && (
         <section className="buttonSection">
