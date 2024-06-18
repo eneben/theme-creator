@@ -1,0 +1,22 @@
+.contrastResult {
+  padding: 0 5px;
+  margin: 5px 0;
+  border: 1px solid black;
+  width: fit-content;
+}
+
+.contrastYup {
+  background-color: green;
+}
+
+.contrastKinda {
+  background-color: orange;
+}
+
+.contrastNope {
+  background-color: red;
+}
+
+.contrastDefault {
+  background-color: grey;
+}
