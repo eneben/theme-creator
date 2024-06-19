@@ -1,9 +1,27 @@
 .themeSelection {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  margin: 10px;
+  position: relative;
 }
 
 .dropdown-form {
   display: flex;
   flex-direction: column;
+}
+
+.themeSelection select {
+  border-radius: 5px;
+  border: 1px solid #000000;
+  height: 30px;
+}
+.themeSelection .buttonSection {
+  position: absolute;
+  bottom: 0;
+  left: calc(30% + 10px);
+}
+
+.themeSelection button {
+  text-align: center;
+  height: 30px;
 }
