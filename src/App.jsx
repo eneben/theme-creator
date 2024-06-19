@@ -1,5 +1,5 @@
 import useLocalStorageState from "use-local-storage-state";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { uid } from "uid";
 import { initialThemes } from "./lib/themes";
 import "./App.css";
@@ -11,6 +11,12 @@ function App() {
     defaultValue: initialThemes,
   });
   const [currentTheme, setCurrentTheme] = useState(themes[0]);
+
+  useEffect(() => {
+    const newCurrentTheme =
+      themes.find((theme) => theme.id === currentTheme?.id) || themes[0];
+    setCurrentTheme(newCurrentTheme);
+  }, [themes]);
 
   function handleChangeDisplayedTheme(newThemeName) {
     const relatedThemeIndex = themes.findIndex(
@@ -25,24 +31,18 @@ function App() {
         ? {
             ...theme,
             colors: [
-              ...theme.colors,
               {
                 id: uid(),
                 role: newColor.roleInput,
                 hex: newColor.hexInputText,
                 contrastText: newColor.contrastTextInputText,
               },
+              ...theme.colors,
             ],
           }
         : theme;
     });
-
     setThemes(newThemes);
-
-    const newCurrentTheme = newThemes.find(
-      (theme) => theme.id === currentTheme.id
-    );
-    setCurrentTheme(newCurrentTheme);
   }
 
   function handleDeleteColor(id) {
@@ -56,13 +56,7 @@ function App() {
           }
         : theme;
     });
-
     setThemes(newThemes);
-
-    const newCurrentTheme = newThemes.find(
-      (theme) => theme.id === currentTheme.id
-    );
-    setCurrentTheme(newCurrentTheme);
   }
 
   function handleUpdateColor(newColor, id) {
@@ -83,13 +77,7 @@ function App() {
           }
         : theme;
     });
-
     setThemes(newThemes);
-
-    const newCurrentTheme = newThemes.find(
-      (theme) => theme.id === currentTheme.id
-    );
-    setCurrentTheme(newCurrentTheme);
   }
 
   return (
