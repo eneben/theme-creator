@@ -1,6 +1,6 @@
 .themeSelection {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 40% 60%;
   margin: 10px;
   position: relative;
 }
@@ -18,7 +18,7 @@
 .themeSelection .buttonSection {
   position: absolute;
   bottom: 0;
-  left: calc(30% + 10px);
+  left: calc(40% + 10px);
 }
 
 .themeSelection button {

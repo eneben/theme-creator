@@ -1,4 +1,5 @@
 import useLocalStorageState from "use-local-storage-state";
+import { useState } from "react";
 import { uid } from "uid";
 import { initialThemes } from "./lib/colors";
 import "./App.css";
@@ -9,29 +10,51 @@ function App() {
   const [themes, setThemes] = useLocalStorageState("themes", {
     defaultValue: initialThemes,
   });
-
-  const [colors, setColors] = useLocalStorageState("colors", {
-    defaultValue: themes[0].colors,
-  });
+  const [currentTheme, setCurrentTheme] = useState(themes[0]);
 
   function handleChangeDisplayedTheme(newThemeName) {
     const relatedThemeIndex = themes.findIndex(
       (theme) => theme.name === newThemeName
     );
-    setColors(themes[relatedThemeIndex].colors);
+    setCurrentTheme(themes[relatedThemeIndex]);
   }
 
+  // Bei AddColor u.ä.: 1. in welchem Theme befinden wir uns?
+  // 2. dann in diesem Theme das colors array verändern.
+  // 3. also dafür themes[array in dem wir uns befinden].colors ändern.
+
   function handleAddColor(newColor) {
-    setColors([
-      {
-        id: uid(),
-        role: newColor.roleInput,
-        hex: newColor.hexInputText,
-        contrastText: newColor.contrastTextInputText,
-      },
-      ...colors,
-    ]);
+    const newThemes = themes.map((theme) =>
+      theme.id === currentTheme.id
+        ? {
+            ...theme,
+            colors: [
+              ...theme.colors,
+              {
+                id: uid(),
+                role: newColor.roleInput,
+                hex: newColor.hexInputText,
+                contrastText: newColor.contrastTextInputText,
+              },
+            ],
+          }
+        : theme
+    );
+
+    setThemes(newThemes);
   }
+
+  // function handleAddColor(newColor) {
+  //   setColors([
+  //     {
+  //       id: uid(),
+  //       role: newColor.roleInput,
+  //       hex: newColor.hexInputText,
+  //       contrastText: newColor.contrastTextInputText,
+  //     },
+  //     ...colors,
+  //   ]);
+  // }
 
   function handleDeleteColor(id) {
     const colorsToKeep = colors.filter((color) => {
@@ -63,7 +86,7 @@ function App() {
         onChangeDisplayedTheme={handleChangeDisplayedTheme}
       />
       <Theme
-        colors={colors}
+        colors={currentTheme.colors}
         onAddColor={handleAddColor}
         onDeleteColor={handleDeleteColor}
         onUpdateColor={handleUpdateColor}
