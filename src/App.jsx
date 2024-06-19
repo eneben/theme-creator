@@ -1,13 +1,17 @@
 import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
-import { initialColors } from "./lib/colors";
+import { initialColors, initialThemes } from "./lib/colors";
 import "./App.css";
-import Color from "./Components/Color/Color";
-import ColorForm from "./Components/ColorForm/ColorForm";
+import ThemeSelection from "./Components/ThemeSelection/ThemeSelection";
+import Theme from "./Components/Theme/Theme";
 
 function App() {
   const [colors, setColors] = useLocalStorageState("colors", {
     defaultValue: initialColors,
+  });
+
+  const [themes, setThemes] = useLocalStorageState("themes", {
+    defaultValue: initialThemes,
   });
 
   function handleAddColor(newColor) {
@@ -47,26 +51,13 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onTransferColor={handleAddColor} buttonText="ADD COLOR" />
-      <>
-        {colors.length === 0 ? (
-          <p className="noColorsMessage">
-            No colors... start by adding one!
-            <span aria-label="smile-emoji">🙂</span>
-          </p>
-        ) : (
-          colors.map((color) => {
-            return (
-              <Color
-                onDeleteColor={handleDeleteColor}
-                onUpdateColor={handleUpdateColor}
-                key={color.id}
-                color={color}
-              />
-            );
-          })
-        )}
-      </>
+      <ThemeSelection />
+      <Theme
+        colors={colors}
+        onAddColor={handleAddColor}
+        onDeleteColor={handleDeleteColor}
+        onUpdateColor={handleUpdateColor}
+      />
     </>
   );
 }
