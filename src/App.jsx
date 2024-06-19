@@ -19,13 +19,9 @@ function App() {
     setCurrentTheme(themes[relatedThemeIndex]);
   }
 
-  // Bei AddColor u.ä.: 1. in welchem Theme befinden wir uns?
-  // 2. dann in diesem Theme das colors array verändern.
-  // 3. also dafür themes[array in dem wir uns befinden].colors ändern.
-
   function handleAddColor(newColor) {
     const newThemes = themes.map((theme) => {
-      theme.id === currentTheme.id
+      return theme.id === currentTheme.id
         ? {
             ...theme,
             colors: [
@@ -49,38 +45,51 @@ function App() {
     setCurrentTheme(newCurrentTheme);
   }
 
-  // function handleAddColor(newColor) {
-  //   setColors([
-  //     {
-  //       id: uid(),
-  //       role: newColor.roleInput,
-  //       hex: newColor.hexInputText,
-  //       contrastText: newColor.contrastTextInputText,
-  //     },
-  //     ...colors,
-  //   ]);
-  // }
-
   function handleDeleteColor(id) {
-    const colorsToKeep = colors.filter((color) => {
-      return color.id !== id;
+    const newThemes = themes.map((theme) => {
+      return theme.id === currentTheme.id
+        ? {
+            ...theme,
+            colors: theme.colors.filter((color) => {
+              return color.id !== id;
+            }),
+          }
+        : theme;
     });
-    setColors(colorsToKeep);
+
+    setThemes(newThemes);
+
+    const newCurrentTheme = newThemes.find(
+      (theme) => theme.id === currentTheme.id
+    );
+    setCurrentTheme(newCurrentTheme);
   }
 
   function handleUpdateColor(newColor, id) {
-    setColors(
-      colors.map((color) => {
-        return color.id === id
-          ? {
-              ...color,
-              role: newColor.roleInput,
-              hex: newColor.hexInputText,
-              contrastText: newColor.contrastTextInputText,
-            }
-          : color;
-      })
+    const newThemes = themes.map((theme) => {
+      return theme.id === currentTheme.id
+        ? {
+            ...theme,
+            colors: theme.colors.map((color) => {
+              return color.id === id
+                ? {
+                    ...color,
+                    role: newColor.roleInput,
+                    hex: newColor.hexInputText,
+                    contrastText: newColor.contrastTextInputText,
+                  }
+                : color;
+            }),
+          }
+        : theme;
+    });
+
+    setThemes(newThemes);
+
+    const newCurrentTheme = newThemes.find(
+      (theme) => theme.id === currentTheme.id
     );
+    setCurrentTheme(newCurrentTheme);
   }
 
   return (
