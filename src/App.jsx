@@ -1,7 +1,7 @@
 import useLocalStorageState from "use-local-storage-state";
 import { useState } from "react";
 import { uid } from "uid";
-import { initialThemes } from "./lib/colors";
+import { initialThemes } from "./lib/themes";
 import "./App.css";
 import ThemeSelection from "./Components/ThemeSelection/ThemeSelection";
 import Theme from "./Components/Theme/Theme";
