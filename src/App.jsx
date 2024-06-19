@@ -24,7 +24,7 @@ function App() {
   // 3. also dafür themes[array in dem wir uns befinden].colors ändern.
 
   function handleAddColor(newColor) {
-    const newThemes = themes.map((theme) =>
+    const newThemes = themes.map((theme) => {
       theme.id === currentTheme.id
         ? {
             ...theme,
@@ -38,10 +38,15 @@ function App() {
               },
             ],
           }
-        : theme
-    );
+        : theme;
+    });
 
     setThemes(newThemes);
+
+    const newCurrentTheme = newThemes.find(
+      (theme) => theme.id === currentTheme.id
+    );
+    setCurrentTheme(newCurrentTheme);
   }
 
   // function handleAddColor(newColor) {
