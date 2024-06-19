@@ -1,18 +1,25 @@
 import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
-import { initialColors, initialThemes } from "./lib/colors";
+import { initialThemes } from "./lib/colors";
 import "./App.css";
 import ThemeSelection from "./Components/ThemeSelection/ThemeSelection";
 import Theme from "./Components/Theme/Theme";
 
 function App() {
-  const [colors, setColors] = useLocalStorageState("colors", {
-    defaultValue: initialColors,
-  });
-
   const [themes, setThemes] = useLocalStorageState("themes", {
     defaultValue: initialThemes,
   });
+
+  const [colors, setColors] = useLocalStorageState("colors", {
+    defaultValue: themes[0].colors,
+  });
+
+  function handleChangeDisplayedTheme(newThemeName) {
+    const relatedThemeIndex = themes.findIndex(
+      (theme) => theme.name === newThemeName
+    );
+    setColors(themes[relatedThemeIndex].colors);
+  }
 
   function handleAddColor(newColor) {
     setColors([
@@ -51,7 +58,10 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ThemeSelection />
+      <ThemeSelection
+        themes={themes}
+        onChangeDisplayedTheme={handleChangeDisplayedTheme}
+      />
       <Theme
         colors={colors}
         onAddColor={handleAddColor}

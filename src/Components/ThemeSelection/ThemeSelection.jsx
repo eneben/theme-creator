@@ -1,7 +1,7 @@
 import Button from "../Button/Button";
 import "./ThemeSelection.css";
 
-export default function ThemeSelection() {
+export default function ThemeSelection({ themes, onChangeDisplayedTheme }) {
   function handleAddTheme() {
     console.log("add theme");
   }
@@ -14,15 +14,23 @@ export default function ThemeSelection() {
     console.log("delete theme");
   }
 
+  function onDropdownChange(event) {
+    const newThemeName = event.target.value;
+    onChangeDisplayedTheme(newThemeName);
+  }
+
   return (
     <section className="themeSelection">
-      <form>
+      <form className="dropdown-form" onChange={onDropdownChange}>
         <label htmlFor="themes">Choose a theme:</label>
         <select id="themes" name="themes">
-          {/* <option value="default">default</option>
-                <option value=""></option> 
-                OPTIONS DYNAMISCH ERZEUGEN NACH THEMES
-                */}
+          {themes.map((theme) => {
+            return (
+              <option key={theme.id} value={theme.name}>
+                {theme.name}
+              </option>
+            );
+          })}
         </select>
       </form>
       <section className="buttonSection">
