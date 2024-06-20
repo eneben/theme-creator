@@ -16,7 +16,7 @@ function App() {
     const newCurrentTheme =
       themes.find((theme) => theme.id === currentTheme?.id) || themes[0];
     setCurrentTheme(newCurrentTheme);
-  }, [themes]);
+  }, [themes, currentTheme?.id]);
 
   function handleChangeDisplayedTheme(newThemeName) {
     const relatedThemeIndex = themes.findIndex(
