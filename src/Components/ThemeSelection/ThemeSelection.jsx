@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import "./ThemeSelection.css";
 
@@ -11,6 +11,12 @@ export default function ThemeSelection({
   onDeleteTheme,
 }) {
   const [statusTheme, setStatusTheme] = useState("isChoosingTheme");
+  const [controlledInputForCurrentTheme, setControlledInputForCurrentTheme] =
+    useState(currentTheme.name);
+
+  useEffect(() => {
+    setControlledInputForCurrentTheme(currentTheme.name);
+  }, [currentTheme.name]);
 
   function handleAddButton() {
     setStatusTheme("isAddingTheme");
@@ -31,7 +37,7 @@ export default function ThemeSelection({
   function onDropdownChange(event) {
     const newThemeName = event.target.value;
     onChangeDisplayedTheme(newThemeName);
-    //hier eine controlled component hinzufügen
+    setControlledInputForCurrentTheme(newThemeName);
   }
 
   function handleAddingThemeSubmit(event) {
@@ -63,9 +69,15 @@ export default function ThemeSelection({
     >
       {statusTheme === "isChoosingTheme" && (
         <>
-          <form className="themeForm" onChange={onDropdownChange}>
+          <form className="themeForm">
             <label htmlFor="themes">Choose a theme:</label>
-            <select className="themeChoice" id="themes" name="themes">
+            <select
+              className="themeChoice"
+              id="themes"
+              name="themes"
+              value={controlledInputForCurrentTheme}
+              onChange={onDropdownChange}
+            >
               {themes.map((theme) => {
                 return (
                   <option key={theme.id} value={theme.name}>
