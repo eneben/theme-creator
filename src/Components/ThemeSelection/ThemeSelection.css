@@ -5,6 +5,13 @@
   position: relative;
 }
 
+.deletingTheme {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px;
+}
+
 .themeForm {
   display: flex;
   flex-direction: column;
@@ -24,4 +31,9 @@
 .themeSelection button {
   text-align: center;
   height: 30px;
+}
+
+.disabled {
+  color: #888;
+  opacity: 0.5;
 }

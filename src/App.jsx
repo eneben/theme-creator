@@ -80,12 +80,38 @@ function App() {
     setThemes(newThemes);
   }
 
+  function handleAddTheme(newTheme) {
+    const newThemeObject = { id: uid(), name: newTheme, colors: [] };
+    setThemes([...themes, newThemeObject]);
+    setCurrentTheme(newThemeObject);
+  }
+
+  function handleUpdateTheme(updatedThemeName) {
+    const updatedThemes = themes.map((theme) => {
+      return theme.id === currentTheme.id
+        ? { ...theme, name: updatedThemeName }
+        : theme;
+    });
+    setThemes(updatedThemes);
+  }
+
+  function handleDeleteTheme() {
+    const themesToKeep = themes.filter((theme) => {
+      return theme.id !== currentTheme.id;
+    });
+    setThemes(themesToKeep);
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
       <ThemeSelection
         themes={themes}
+        currentTheme={currentTheme}
         onChangeDisplayedTheme={handleChangeDisplayedTheme}
+        onAddTheme={handleAddTheme}
+        onUpdateTheme={handleUpdateTheme}
+        onDeleteTheme={handleDeleteTheme}
       />
       <Theme
         colors={currentTheme.colors}

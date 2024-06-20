@@ -2,18 +2,25 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import "./ThemeSelection.css";
 
-export default function ThemeSelection({ themes, onChangeDisplayedTheme }) {
+export default function ThemeSelection({
+  themes,
+  currentTheme,
+  onChangeDisplayedTheme,
+  onAddTheme,
+  onUpdateTheme,
+  onDeleteTheme,
+}) {
   const [statusTheme, setStatusTheme] = useState("isChoosingTheme");
 
-  function handleAddTheme() {
+  function handleAddButton() {
     setStatusTheme("isAddingTheme");
   }
 
-  function handleEditTheme() {
+  function handleEditButton() {
     setStatusTheme("isEditingTheme");
   }
 
-  function handleDeleteTheme() {
+  function handleDeleteButton() {
     setStatusTheme("isDeletingTheme");
   }
 
@@ -24,25 +31,36 @@ export default function ThemeSelection({ themes, onChangeDisplayedTheme }) {
   function onDropdownChange(event) {
     const newThemeName = event.target.value;
     onChangeDisplayedTheme(newThemeName);
+    //hier eine controlled component hinzufügen
   }
 
   function handleAddingThemeSubmit(event) {
     event.preventDefault();
-    console.log("handleAddingThemeSubmit function");
     const newTheme = event.target.nameTheme.value;
+    onAddTheme(newTheme);
+    event.target.reset();
+    setStatusTheme("isChoosingTheme");
   }
 
   function handleEditingThemeSubmit(event) {
-    console.log("handleEditingThemeSubmit function");
-    console.log("event.target", event.target);
+    event.preventDefault();
+    const updatedThemeName = event.target.renameTheme.value;
+    onUpdateTheme(updatedThemeName);
+    event.target.reset();
+    setStatusTheme("isChoosingTheme");
   }
 
-  function handleConfirmDeleteTheme() {
-    console.log("handleConfirmDeleteTheme function");
+  function handleDeleteConfirmation() {
+    onDeleteTheme();
+    setStatusTheme("isChoosingTheme");
   }
 
   return (
-    <section className="themeSelection">
+    <section
+      className={
+        statusTheme === "isDeletingTheme" ? "deletingTheme" : "themeSelection"
+      }
+    >
       {statusTheme === "isChoosingTheme" && (
         <>
           <form className="themeForm" onChange={onDropdownChange}>
@@ -58,9 +76,21 @@ export default function ThemeSelection({ themes, onChangeDisplayedTheme }) {
             </select>
           </form>
           <section className="buttonSection">
-            <Button type="button" onClick={handleAddTheme} text="ADD" />
-            <Button type="button" onClick={handleEditTheme} text="EDIT" />
-            <Button type="button" onClick={handleDeleteTheme} text="DELETE" />
+            <Button type="button" onClick={handleAddButton} text="ADD" />
+            <Button
+              type="button"
+              onClick={handleEditButton}
+              text="EDIT"
+              className={currentTheme.name === "Default Theme" && "disabled"}
+              disabled={currentTheme.name === "Default Theme"}
+            />
+            <Button
+              type="button"
+              onClick={handleDeleteButton}
+              text="DELETE"
+              className={currentTheme.name === "Default Theme" && "disabled"}
+              disabled={currentTheme.name === "Default Theme"}
+            />
           </section>
         </>
       )}
@@ -103,12 +133,12 @@ export default function ThemeSelection({ themes, onChangeDisplayedTheme }) {
         <>
           <p className="warning">
             <span aria-label="warning-emoji">⚠️ </span>Do you really want to
-            delete this color theme?
+            delete this color theme: {currentTheme.name}?
           </p>
           <section className="buttonSection">
             <Button
               type="button"
-              onClick={handleConfirmDeleteTheme}
+              onClick={handleDeleteConfirmation}
               text="DELETE"
             />
             <Button type="button" onClick={handleCancelButton} text="CANCEL" />
