@@ -10,7 +10,9 @@ function App() {
   const [themes, setThemes] = useLocalStorageState("themes", {
     defaultValue: initialThemes,
   });
-  const [currentTheme, setCurrentTheme] = useState(themes[0]);
+  const [currentTheme, setCurrentTheme] = useState(
+    themes[0] || initialThemes[0]
+  );
 
   useEffect(() => {
     const newCurrentTheme =
@@ -19,10 +21,8 @@ function App() {
   }, [themes, currentTheme?.id]);
 
   function handleChangeDisplayedTheme(newThemeName) {
-    const relatedThemeIndex = themes.findIndex(
-      (theme) => theme.name === newThemeName
-    );
-    setCurrentTheme(themes[relatedThemeIndex]);
+    const relatedTheme = themes.find((theme) => theme.name === newThemeName);
+    setCurrentTheme(relatedTheme);
   }
 
   function handleAddColor(newColor) {

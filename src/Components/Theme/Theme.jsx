@@ -14,7 +14,9 @@ export default function Theme({
         {colors.length === 0 ? (
           <p className="noColorsMessage">
             No colors... start by adding one!
-            <span aria-label="smile-emoji">🙂</span>
+            <span role="img" aria-label="smile-emoji">
+              🙂
+            </span>
           </p>
         ) : (
           colors.map((color) => {

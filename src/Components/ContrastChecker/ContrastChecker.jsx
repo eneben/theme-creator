@@ -36,21 +36,21 @@ export default function ContrastChecker({ firstColor, secondColor }) {
     fetchContrast();
   }, [firstColor, secondColor]);
 
+  const contrastClassNames = {
+    Yup: "contrastYup",
+    Kinda: "contrastKinda",
+    Nope: "contrastNope",
+    default: "contrastDefault",
+  };
+
+  const contrastClass =
+    contrastClassNames[contrastResult] || contrastClassNames.default;
+
   return (
     <>
       {errorMessage && <p>An error occurred. Have a look in the console.</p>}
-      <p
-        className={`contrastResult ${
-          contrastResult === "Yup"
-            ? "contrastYup"
-            : contrastResult === "Kinda"
-            ? "contrastKinda"
-            : contrastResult === "Nope"
-            ? "contrastNope"
-            : "contrastDefault"
-        }`}
-      >
-        Overall Contrast Score: {contrastResult ? contrastResult : "loading..."}
+      <p className={`contrastResult ${contrastClass}`}>
+        Overall Contrast Score: {contrastResult || "loading..."}
       </p>
     </>
   );

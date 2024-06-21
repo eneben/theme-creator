@@ -11,12 +11,11 @@ export default function ThemeSelection({
   onDeleteTheme,
 }) {
   const [statusTheme, setStatusTheme] = useState("isChoosingTheme");
-  const [controlledInputForCurrentTheme, setControlledInputForCurrentTheme] =
-    useState(currentTheme.name);
+  const [themeName, setthemeName] = useState(currentTheme.name);
 
-  useEffect(() => {
-    setControlledInputForCurrentTheme(currentTheme.name);
-  }, [currentTheme.name]);
+  // useEffect(() => {
+  //   setthemeName(currentTheme.name);
+  // }, [currentTheme.name]);
 
   function handleAddButton() {
     setStatusTheme("isAddingTheme");
@@ -37,7 +36,7 @@ export default function ThemeSelection({
   function onDropdownChange(event) {
     const newThemeName = event.target.value;
     onChangeDisplayedTheme(newThemeName);
-    setControlledInputForCurrentTheme(newThemeName);
+    setthemeName(newThemeName);
   }
 
   function handleAddingThemeSubmit(event) {
@@ -75,7 +74,7 @@ export default function ThemeSelection({
               className="themeChoice"
               id="themes"
               name="themes"
-              value={controlledInputForCurrentTheme}
+              value={themeName}
               onChange={onDropdownChange}
             >
               {themes.map((theme) => {
@@ -144,8 +143,10 @@ export default function ThemeSelection({
       {statusTheme === "isDeletingTheme" && (
         <>
           <p className="warning">
-            <span aria-label="warning-emoji">⚠️ </span>Do you really want to
-            delete this color theme: {currentTheme.name}?
+            <span role="img" aria-label="warning-emoji">
+              ⚠️{" "}
+            </span>
+            Do you really want to delete this color theme: {currentTheme.name}?
           </p>
           <section className="buttonSection">
             <Button
