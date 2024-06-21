@@ -15,6 +15,7 @@
 .themeForm {
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
 }
 
 .themeChoice {
@@ -25,6 +26,7 @@
 .themeSelection .buttonSection {
   position: absolute;
   bottom: 0;
+  right: 0;
   left: calc(40% + 10px);
 }
 
