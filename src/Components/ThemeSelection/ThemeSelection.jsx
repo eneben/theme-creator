@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "../Button/Button";
 import "./ThemeSelection.css";
 
@@ -11,11 +11,6 @@ export default function ThemeSelection({
   onDeleteTheme,
 }) {
   const [statusTheme, setStatusTheme] = useState("isChoosingTheme");
-  const [themeName, setthemeName] = useState(currentTheme.name);
-
-  // useEffect(() => {
-  //   setthemeName(currentTheme.name);
-  // }, [currentTheme.name]);
 
   function handleAddButton() {
     setStatusTheme("isAddingTheme");
@@ -36,7 +31,6 @@ export default function ThemeSelection({
   function onDropdownChange(event) {
     const newThemeName = event.target.value;
     onChangeDisplayedTheme(newThemeName);
-    setthemeName(newThemeName);
   }
 
   function handleAddingThemeSubmit(event) {
@@ -74,7 +68,7 @@ export default function ThemeSelection({
               className="themeChoice"
               id="themes"
               name="themes"
-              value={themeName}
+              value={currentTheme.name}
               onChange={onDropdownChange}
             >
               {themes.map((theme) => {

@@ -10,15 +10,16 @@ function App() {
   const [themes, setThemes] = useLocalStorageState("themes", {
     defaultValue: initialThemes,
   });
+
   const [currentTheme, setCurrentTheme] = useState(
     themes[0] || initialThemes[0]
   );
 
-  useEffect(() => {
-    const newCurrentTheme =
-      themes.find((theme) => theme.id === currentTheme?.id) || themes[0];
-    setCurrentTheme(newCurrentTheme);
-  }, [themes, currentTheme?.id]);
+  // useEffect(() => {
+  //   const newCurrentTheme =
+  //     themes.find((theme) => theme.id === currentTheme?.id) || themes[0];
+  //   setCurrentTheme(newCurrentTheme);
+  // }, [themes, currentTheme?.id]);
 
   function handleChangeDisplayedTheme(newThemeName) {
     const relatedTheme = themes.find((theme) => theme.name === newThemeName);
@@ -43,6 +44,11 @@ function App() {
         : theme;
     });
     setThemes(newThemes);
+
+    const newCurrentTheme = newThemes.find(
+      (theme) => theme.id === currentTheme.id
+    );
+    setCurrentTheme(newCurrentTheme);
   }
 
   function handleDeleteColor(id) {
@@ -57,6 +63,11 @@ function App() {
         : theme;
     });
     setThemes(newThemes);
+
+    const newCurrentTheme = newThemes.find(
+      (theme) => theme.id === currentTheme.id
+    );
+    setCurrentTheme(newCurrentTheme);
   }
 
   function handleUpdateColor(newColor, id) {
@@ -78,6 +89,11 @@ function App() {
         : theme;
     });
     setThemes(newThemes);
+
+    const newCurrentTheme = newThemes.find(
+      (theme) => theme.id === currentTheme.id
+    );
+    setCurrentTheme(newCurrentTheme);
   }
 
   function handleAddTheme(newTheme) {
@@ -93,6 +109,11 @@ function App() {
         : theme;
     });
     setThemes(updatedThemes);
+
+    const updatedTheme = updatedThemes.find(
+      (theme) => theme.id === currentTheme.id
+    );
+    setCurrentTheme(updatedTheme);
   }
 
   function handleDeleteTheme() {
@@ -100,6 +121,8 @@ function App() {
       return theme.id !== currentTheme.id;
     });
     setThemes(themesToKeep);
+
+    setCurrentTheme(themesToKeep[0]);
   }
 
   return (
