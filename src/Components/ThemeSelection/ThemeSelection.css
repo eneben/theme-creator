@@ -1,0 +1,41 @@
+.themeSelection {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin: 10px;
+  position: relative;
+}
+
+.deletingTheme {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px;
+}
+
+.themeForm {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.themeChoice {
+  border-radius: 5px;
+  border: 1px solid #000000;
+  height: 30px;
+}
+.themeSelection .buttonSection {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: calc(40% + 10px);
+}
+
+.themeSelection button {
+  text-align: center;
+  height: 30px;
+}
+
+.disabled {
+  color: #888;
+  opacity: 0.5;
+}
