@@ -1,5 +1,5 @@
 import useLocalStorageState from "use-local-storage-state";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { uid } from "uid";
 import { initialThemes } from "./lib/themes";
 import "./App.css";
